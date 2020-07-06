@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Kvue</title>
+  <script src="./compile.js"></script>
+  <script src="./kvue.js"></script>
+</head>
+<body>
+  
+  <div id="app">
+    <p>{{ name }}</p>
+    <!-- <p>普通文本</p> -->
+    <!-- <p k-text="name"></p> -->
+    <!-- <p>{{ age }}</p> -->
+    <p>{{ obj.abc }}</p>
+    <!-- <p>{{ obj.q.w }}</p> -->
+    <!-- <div k-html="html_"></div> -->
+    <input k-model="obj.abc" type="text"> <br><br>
+    <p>{{ obj.q.w }}</p>
+    <input k-model="obj.q.w" type="text"> <br><br>
+    <button @click="getHaha">HAHAHA...</button>
+  </div>
+</body>
+<script>
+var obj = {
+  name: 123
+};
+obj.name = 'Tom';
+var kv = new Kvue({
+  el: '#app',
+  data: {
+    name: 'Tom',
+    age: '编译文本',
+    learn: 'Math',
+    interested: 'Badminton',
+    text_: 'this is a text',
+    html_: '<span>html</span>',
+    obj:{
+      abc:222,
+      q:{
+        w:9999999
+      }
+    }
+  },
+  created(){
+    console.log('created',this)
+  },
+  mounted(){
+    console.log('mounted',this);
+    
+  },
+  methods: {
+    getHaha(){
+      console.log('HAHAHAHAHAHA',this.name,arguments,this);
+      this.obj = {
+        abc:2223,
+        q:{
+          w:11111
+        }
+      };
+    }
+  }
+});
+/* Object.defineProperty(kv.$data, 'name', {
+  get (){
+    return document.querySelector('#name').innerHTML;
+  },
+  set (val) {
+    document.querySelector('#name').innerHTML = val;
+  }
+}); */
+</script>
+</html>
